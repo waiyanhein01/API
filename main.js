@@ -7,8 +7,21 @@ const productPrice = document.querySelector("#productPrice")
 const productGroup = document.querySelector("#productGroup")
 
  
+// async await
+const handleApiBtn = async () => {
 
-const handleApiBtn = () => {
+  const res = await fetch("https://fakestoreapi.com/products")
+  const data = await res.json();
+  for(const el of data){
+    console.log(el)
+    const name = el.title;
+    const price = el.price;
+    const category = el.category;
+    productName.innerText = name;
+    productPrice.innerText = price;
+    productCategory.innerText = category;
+  }
+
   // fetch("https://fakestoreapi.com/products")
   //   .then((res) => res.text())
   //   .then((data) => {
@@ -16,17 +29,17 @@ const handleApiBtn = () => {
   //     console.log(JSON.parse(data));
   //   });
 
-  fetch("https://fakestoreapi.com/products")
-    .then((res) => res.json())
-    .then((data) => {
-      for(const el of data){
-        const name = el.title;
-        const price = el.price;
-        const category = el.category;
-        productName.innerText = name;
-        productPrice.innerText = price;
-        productCategory.innerText = category;
-      }
-    });
+  // fetch("https://fakestoreapi.com/products")
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     for(const el of data){
+  //       const name = el.title;
+  //       const price = el.price;
+  //       const category = el.category;
+  //       productName.innerText = name;
+  //       productPrice.innerText = price;
+  //       productCategory.innerText = category;
+  //     }
+  //   });
 };
 apiBtn.addEventListener("click", handleApiBtn);
